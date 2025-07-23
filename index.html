@@ -18,142 +18,47 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>
-         <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KITNA LIKHEGI RAND.</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
+body>
+
+    <h2>Check if Pair Exists with Given Sum</h2>
+
+    <label>Enter array elements (comma-separated):</label><br>
+    <input type="text" id="arrayInput" placeholder="e.g. 10,15,3,7"><br>
+
+    <label>Enter target sum:</label><br>
+    <input type="number" id="targetInput" placeholder="e.g. 17"><br>
+
+    <button onclick="checkPairSum()">Check</button>
+
+    <div id="result"></div>
+
+    <script>
+        function checkPairSum() {
+            const arr = document.getElementById("arrayInput").value
+                        .split(',')
+                        .map(x => parseInt(x.trim()));
+            const target = parseInt(document.getElementById("targetInput").value);
+            const seen = new Set();
+            let found = false;
+
+            for (let num of arr) {
+                if (seen.has(target - num)) {
+                    found = true;
+                    break;
+                }
+                seen.add(num);
+            }
+
+            const result = document.getElementById("result");
+            if (found) {
+                result.textContent = "✅ Yes, a pair with the target sum exists.";
+                result.style.color = "green";
+            } else {
+                result.textContent = "❌ No, such a pair does not exist.";
+                result.style.color = "red";
+            }
         }
-        h1, h2 {
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
-</head>
-<body>
-   <h2>Q1: Pushdown Automaton (PDA) for L = { aⁿ bⁱ cⁱ dⁿ | n ≥ 0, i > 0 }</h2>
-
-    <p><strong>Language Constraints:</strong></p>
-    <ul>
-        <li>Number of <code>a</code>'s = number of <code>d</code>'s</li>
-        <li>Number of <code>b</code>'s = number of <code>c</code>'s</li>
-        <li>Order: all a's → b's → c's → d's</li>
-    </ul>
-
-    <p><strong>Stack Usage:</strong></p>
-    <ul>
-        <li>Push <code>A</code> for every <code>a</code></li>
-        <li>Push <code>B</code> for every <code>b</code></li>
-        <li>Pop <code>B</code> for each <code>c</code></li>
-        <li>Pop <code>A</code> for each <code>d</code></li>
-    </ul>
-
-    <p><strong>Accepting state:</strong> Reached if input is finished and stack has initial symbol <code>Z₀</code></p>
-
-    <h3>Test Input: <code>abbbeccd</code></h3>
-    <table>
-        <tr><th>Step</th><th>ID</th><th>Action</th></tr>
-        <tr><td>1</td><td>(q0, abbbeccd, Z₀)</td><td>Read <code>a</code>, push A → AZ₀</td></tr>
-        <tr><td>2</td><td>(q0, bbbeccd, AZ₀)</td><td>Read <code>b</code>, push B → ABZ₀</td></tr>
-        <tr><td>3</td><td>(q1, bbeccd, ABZ₀)</td><td>Read <code>b</code>, push B → ABBZ₀</td></tr>
-        <tr><td>4</td><td>(q1, beccd, ABBZ₀)</td><td>Read <code>b</code>, push B → ABBBZ₀</td></tr>
-        <tr><td>5</td><td>(q1, eccd, ABBBZ₀)</td><td class="reject">Read <code>e</code>: Invalid symbol</td></tr>
-    </table>
-    <p class="reject">Result: Rejected ❌</p>
-
-    <h3>Test Input: <code>abbecddd</code></h3>
-    <table>
-        <tr><th>Step</th><th>ID</th><th>Action</th></tr>
-        <tr><td>1</td><td>(q0, abbecddd, Z₀)</td><td>Read <code>a</code>, push A → AZ₀</td></tr>
-        <tr><td>2</td><td>(q0, bbecddd, AZ₀)</td><td>Read <code>b</code>, push B → ABZ₀</td></tr>
-        <tr><td>3</td><td>(q1, becddd, ABZ₀)</td><td>Read <code>b</code>, push B → ABBZ₀</td></tr>
-        <tr><td>4</td><td>(q1, ecddd, ABBZ₀)</td><td class="reject">Read <code>e</code>: Invalid symbol</td></tr>
-    </table>
-    <p class="reject">Result: Rejected ❌</p>
-
-    <h2>Q2: Turing Machine to Accept Strings with "ABA" as Substring (Σ = {A, B})</h2>
-
-    <p><strong>Language:</strong> Strings over {A, B} that contain <code>ABA</code> as a substring.</p>
-
-    <h3>States:</h3>
-    <ul>
-        <li><code>q0</code>: Start state</li>
-        <li><code>q1</code>: Read A</li>
-        <li><code>q2</code>: Read AB</li>
-        <li><code>q3</code>: Read ABA → Accept</li>
-        <li><code>q_reject</code>: Reject state</li>
-    </ul>
-
-    <h3>Transition Table:</h3>
-    <table>
-        <tr>
-            <th>Current State</th>
-            <th>Read Symbol</th>
-            <th>Write Symbol</th>
-            <th>Move</th>
-            <th>Next State</th>
-        </tr>
-        <tr>
-            <td>q0</td><td>A</td><td>A</td><td>R</td><td>q1</td>
-        </tr>
-        <tr>
-            <td>q0</td><td>B</td><td>B</td><td>R</td><td>q0</td>
-        </tr>
-        <tr>
-            <td>q1</td><td>A</td><td>A</td><td>R</td><td>q1</td>
-        </tr>
-        <tr>
-            <td>q1</td><td>B</td><td>B</td><td>R</td><td>q2</td>
-        </tr>
-        <tr>
-            <td>q2</td><td>A</td><td>A</td><td>R</td><td>q3</td>
-        </tr>
-        <tr>
-            <td>q2</td><td>B</td><td>B</td><td>R</td><td>q0</td>
-        </tr>
-        <tr>
-            <td>q3</td><td></td><td></td><td>S</td><td>Accept</td>
-        </tr>
-    </table>
-
-    <h3>State Diagram Description:</h3>
-    <ul>
-        <li><code>q0</code> → on <code>A</code> → <code>q1</code></li>
-        <li><code>q1</code> → on <code>B</code> → <code>q2</code></li>
-        <li><code>q2</code> → on <code>A</code> → <code>q3</code> (Accept)</li>
-        <li>If <code>ABA</code> not found, loop back or reject</li>
-    </ul>
-
-    <h3>Example Run:</h3>
-    <p><strong>Input:</strong> <code>BABABA</code></p>
-    <ol>
-        <li>q0: Read B → stay q0</li>
-        <li>q0: Read A → q1</li>
-        <li>q1: Read B → q2</li>
-        <li>q2: Read A → q3 → Accept ✅</li>
-    </ol>
+    </script>
   
   </body>
 </html>

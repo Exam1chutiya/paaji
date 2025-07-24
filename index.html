@@ -479,6 +479,57 @@ int main() {
   </div>
 
 
+  <h1>SECTION A</h1>
+  <h1>Q5-Difference between BST and AVL Tree</h1>
+
+  <table>
+    <tr>
+      <th>Feature</th>
+      <th>Binary Search Tree (BST)</th>
+      <th>AVL Tree</th>
+    </tr>
+    <tr>
+      <td>Definition</td>
+      <td>A binary tree where left &lt; root &lt; right</td>
+      <td>A self-balancing BST with balance factor -1, 0, or +1</td>
+    </tr>
+    <tr>
+      <td>Balance Condition</td>
+      <td>No strict balancing</td>
+      <td>Strictly balanced using rotations</td>
+    </tr>
+    <tr>
+      <td>Time Complexity (Search)</td>
+      <td>Average: O(log n), Worst: O(n)</td>
+      <td>Always O(log n)</td>
+    </tr>
+    <tr>
+      <td>Rotations</td>
+      <td>Not used</td>
+      <td>Used to maintain balance</td>
+    </tr>
+    <tr>
+      <td>Height Difference</td>
+      <td>Can be unbalanced</td>
+      <td>Height difference ≤ 1 for each node</td>
+    </tr>
+    <tr>
+      <td>Efficiency</td>
+      <td>Can degrade with skewed data</td>
+      <td>Guaranteed efficiency</td>
+    </tr>
+    <tr>
+      <td>Use Case</td>
+      <td>Data is random, balance not critical</td>
+      <td>Search and balance are both critical</td>
+    </tr>
+    <tr>
+      <td>Extra Space</td>
+      <td>Less (no balance info stored)</td>
+      <td>More (balance factor stored per node)</td>
+    </tr>
+  </table>
+
 
   
   </body>

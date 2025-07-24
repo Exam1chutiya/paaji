@@ -20,7 +20,7 @@
 <body>
 
   
-
+ <h1>SECTION D</h1>
   <h1>Q1: Evaluate Postfix Expression Using Stack in C</h1>
   
   <div class="section">
@@ -109,6 +109,176 @@ int main() {
     </p>
   </div>
 
+<h1>SECTION C</h1>
+    
+  <h1>Q1: Library Book List - Remove Duplicate Book IDs</h1>
+
+  <div class="section">
+    <p><strong>Description:</strong> Maintain a list of Book IDs, ensure uniqueness by removing duplicates, and display the final list.</p>
+
+    <h2>C Code:</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+
+#define MAX 100
+
+int removeDuplicates(int arr[], int n) {
+    int temp[MAX];
+    int i, j, k = 0;
+    for (i = 0; i &lt; n; i++) {
+        int duplicate = 0;
+        for (j = 0; j &lt; k; j++) {
+            if (arr[i] == temp[j]) {
+                duplicate = 1;
+                break;
+            }
+        }
+        if (!duplicate) {
+            temp[k++] = arr[i];
+        }
+    }
+
+    for (i = 0; i &lt; k; i++) {
+        arr[i] = temp[i];
+    }
+    return k; // new size
+}
+
+int main() {
+    int books[MAX], n, i;
+
+    printf("Enter number of books: ");
+    scanf("%d", &amp;n);
+
+    printf("Enter Book IDs:\n");
+    for (i = 0; i &lt; n; i++) {
+        scanf("%d", &amp;books[i]);
+    }
+
+    n = removeDuplicates(books, n);
+
+    printf("\nUnique Book IDs in Library:\n");
+    for (i = 0; i &lt; n; i++) {
+        printf("%d ", books[i]);
+    }
+    printf("\n");
+
+    return 0;
+}</code></pre>
+
+    <h2>Sample Output:</h2>
+    <pre>
+Enter number of books: 7
+Enter Book IDs:
+101 102 103 101 104 102 105
+
+Unique Book IDs in Library:
+101 102 103 104 105
+    </pre>
+  </div>
+
+  <h1>Q2: Restaurant Order Queue using Circular Queue</h1>
+
+  <div class="section">
+    <p><strong>Description:</strong> A circular queue to manage orders in a restaurant where new orders wait if the queue is full.</p>
+
+    <h2>C Code:</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#define SIZE 5
+
+int queue[SIZE];
+int front = -1, rear = -1;
+
+int isFull() {
+    return ((rear + 1) % SIZE == front);
+}
+
+int isEmpty() {
+    return (front == -1);
+}
+
+void enqueue(int order) {
+    if (isFull()) {
+        printf("Queue is full. Order %d is waiting...\n", order);
+        return;
+    }
+    if (isEmpty()) {
+        front = rear = 0;
+    } else {
+        rear = (rear + 1) % SIZE;
+    }
+    queue[rear] = order;
+    printf("Order %d added.\n", order);
+}
+
+void dequeue() {
+    if (isEmpty()) {
+        printf("Queue is empty. No orders to handle.\n");
+        return;
+    }
+    printf("Order %d handled.\n", queue[front]);
+    if (front == rear) {
+        front = rear = -1; // Queue is now empty
+    } else {
+        front = (front + 1) % SIZE;
+    }
+}
+
+void display() {
+    if (isEmpty()) {
+        printf("Queue is empty.\n");
+        return;
+    }
+
+    printf("Current Orders in Queue: ");
+    int i = front;
+    while (1) {
+        printf("%d ", queue[i]);
+        if (i == rear)
+            break;
+        i = (i + 1) % SIZE;
+    }
+    printf("\n");
+}
+
+int main() {
+    enqueue(101);
+    enqueue(102);
+    enqueue(103);
+    enqueue(104);
+    enqueue(105);
+    enqueue(106); // Should wait
+
+    display();
+
+    dequeue();
+    dequeue();
+
+    enqueue(106); // Now it can be added
+    enqueue(107); // Should wait again
+
+    display();
+
+    return 0;
+}</code></pre>
+
+    <h2>Sample Output:</h2>
+    <pre>
+Order 101 added.
+Order 102 added.
+Order 103 added.
+Order 104 added.
+Order 105 added.
+Queue is full. Order 106 is waiting...
+
+Current Orders in Queue: 101 102 103 104 105
+Order 101 handled.
+Order 102 handled.
+Order 106 added.
+Queue is full. Order 107 is waiting...
+
+Current Orders in Queue: 103 104 105 106
+    </pre>
+  </div>
 
 
 

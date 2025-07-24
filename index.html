@@ -281,6 +281,120 @@ Current Orders in Queue: 103 104 105 106
   </div>
 
 <h1>SECTION A AUR B KI ACCHI PHOTOS MIL SAKTI HAI KYA. VALUES UNCLEAR HAI</h1>
+ <h1>ECTION B</h1>
+
+
+  <h1>Q1: Hash Table with Chaining (Open Hashing)</h1>
+
+  <div class="section">
+    <p><strong>Given:</strong> Array size = 5, Hash function: <code>k mod 2</code></p>
+    <p><strong>Keys:</strong> 22, 37, 56, 72, 91, 12, 77</p>
+
+    <h2>Hash Function Calculation:</h2>
+    <pre>
+22 mod 2 = 0  
+37 mod 2 = 1  
+56 mod 2 = 0  
+72 mod 2 = 0  
+91 mod 2 = 1  
+12 mod 2 = 0  
+77 mod 2 = 1  
+    </pre>
+
+    <h2>Final Hash Table (using chaining):</h2>
+    <table>
+      <thead>
+        <tr><th>Index</th><th>Chain</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0</td><td>22 → 56 → 72 → 12</td></tr>
+        <tr><td>1</td><td>37 → 91 → 77</td></tr>
+        <tr><td>2</td><td>—</td></tr>
+        <tr><td>3</td><td>—</td></tr>
+        <tr><td>4</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h1>Q2: Algorithm to Delete an Element from Max-Heap</h1>
+
+  <div class="section">
+    <h2>Max-Heap Deletion Algorithm:</h2>
+    <pre>
+Algorithm DeleteMax(heap[], n):
+1. Replace root with last element → heap[0] = heap[n - 1]
+2. Reduce heap size by 1 → n = n - 1
+3. Set i = 0
+4. while i has at least one child:
+     a. Let maxChild be index of max(heap[2i + 1], heap[2i + 2])
+     b. if heap[i] < heap[maxChild]:
+           swap(heap[i], heap[maxChild])
+           i = maxChild
+        else:
+           break
+5. End
+    </pre>
+    <p><strong>Time Complexity:</strong> O(log n)</p>
+  </div>
+
+  <h1>Q3: C Program - Max Root-to-Leaf Path Sum in BST</h1>
+
+  <div class="section">
+    <h2>Given BST:</h2>
+    <pre>
+         10
+        /  \
+       5    15
+      / \     \
+     5   7     20
+
+Max path = 20 → 15 → 10 = 45
+    </pre>
+
+    <h2>C Program:</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node *left, *right;
+} Node;
+
+Node* newNode(int data) {
+    Node* node = (Node*)malloc(sizeof(Node));
+    node-&gt;data = data;
+    node-&gt;left = node-&gt;right = NULL;
+    return node;
+}
+
+int max(int a, int b) {
+    return a &gt; b ? a : b;
+}
+
+int maxRootToLeafSum(Node* root) {
+    if (root == NULL)
+        return 0;
+    int leftSum = maxRootToLeafSum(root-&gt;left);
+    int rightSum = maxRootToLeafSum(root-&gt;right);
+    return root-&gt;data + max(leftSum, rightSum);
+}
+
+int main() {
+    Node* root = newNode(10);
+    root-&gt;left = newNode(5);
+    root-&gt;right = newNode(15);
+    root-&gt;left-&gt;left = newNode(5);
+    root-&gt;left-&gt;right = newNode(7);
+    root-&gt;right-&gt;right = newNode(20);
+
+    printf("Max Root-to-Leaf Path Sum: %d\n", maxRootToLeafSum(root));
+    return 0;
+}</code></pre>
+
+    <h2>Output:</h2>
+    <pre>Max Root-to-Leaf Path Sum: 45</pre>
+  </div>
+
 
   
   </body>

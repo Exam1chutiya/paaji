@@ -18,47 +18,100 @@
   </style>
 </head>
 <body>
-body>
 
-    <h2>Check if Pair Exists with Given Sum</h2>
+  
 
-    <label>Enter array elements (comma-separated):</label><br>
-    <input type="text" id="arrayInput" placeholder="e.g. 10,15,3,7"><br>
+  <h1>Q1: Evaluate Postfix Expression Using Stack in C</h1>
+  
+  <div class="section">
+    <p><strong>Postfix Expression:</strong> <code>2 3 1 * + 9 -</code> (Equivalent to <code>2 + (3 * 1) - 9</code>)</p>
 
-    <label>Enter target sum:</label><br>
-    <input type="number" id="targetInput" placeholder="e.g. 17"><br>
+    <h2>C Code:</h2>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
 
-    <button onclick="checkPairSum()">Check</button>
+#define MAX 100
 
-    <div id="result"></div>
+int stack[MAX];
+int top = -1;
 
-    <script>
-        function checkPairSum() {
-            const arr = document.getElementById("arrayInput").value
-                        .split(',')
-                        .map(x => parseInt(x.trim()));
-            const target = parseInt(document.getElementById("targetInput").value);
-            const seen = new Set();
-            let found = false;
+void push(int val) {
+    stack[++top] = val;
+}
 
-            for (let num of arr) {
-                if (seen.has(target - num)) {
-                    found = true;
-                    break;
-                }
-                seen.add(num);
-            }
+int pop() {
+    return stack[top--];
+}
 
-            const result = document.getElementById("result");
-            if (found) {
-                result.textContent = "✅ Yes, a pair with the target sum exists.";
-                result.style.color = "green";
-            } else {
-                result.textContent = "❌ No, such a pair does not exist.";
-                result.style.color = "red";
+int evaluatePostfix(char *exp) {
+    char *token = strtok(exp, " ");
+    while (token != NULL) {
+        if (isdigit(token[0])) {
+            push(atoi(token));
+        } else {
+            int val2 = pop();
+            int val1 = pop();
+            switch (token[0]) {
+                case '+': push(val1 + val2); break;
+                case '-': push(val1 - val2); break;
+                case '*': push(val1 * val2); break;
+                case '/': push(val1 / val2); break;
             }
         }
-    </script>
+        token = strtok(NULL, " ");
+    }
+    return pop();
+}
+
+int main() {
+    char expr[] = "2 3 1 * + 9 -";
+    printf("Result = %d\n", evaluatePostfix(expr));
+    return 0;
+}</code></pre>
+
+    <h2>Output:</h2>
+    <pre><code>Result = -4</code></pre>
+  </div>
+
+  <h1>Q2: Construct AVL Tree from Data</h1>
+
+  <div class="section">
+    <p><strong>Given data:</strong> <code>21, 26, 30, 9, 4, 14, 28, 18, 15, 10</code></p>
+    <p><strong>AVL Tree Rules:</strong> Balanced Binary Search Tree with Balance Factor ∈ [-1, 0, 1]</p>
+
+    <h2>Step-by-step Insertions with Rotations:</h2>
+    <ul>
+      <li>Insert 21 → Root</li>
+      <li>Insert 26 → Right of 21</li>
+      <li>Insert 30 → Right of 26 → <strong>RR Rotation at 21 → Left Rotate</strong> → New root: 26</li>
+      <li>Insert 9 → Left of 21</li>
+      <li>Insert 4 → Left of 9</li>
+      <li>Insert 14 → Right of 9</li>
+      <li>Insert 28 → Right of 30</li>
+      <li>Insert 18 → Right of 14</li>
+      <li>Insert 15 → Left of 18 → <strong>RL Rotation at 14</strong> → Right Rotate 18, then Left Rotate 14</li>
+      <li>Insert 10 → Left of 14 → <strong>LR Rotation at 9</strong> → Left Rotate 9, then Right Rotate 21</li>
+    </ul>
+
+    <h2>Final AVL Tree (Level Order):</h2>
+    <pre><code>          26
+        /    \
+      14      30
+     /  \     /
+   10   21  28
+  /    /  \
+ 4    15  18</code></pre>
+
+    <p><strong>Visualization Tip:</strong> You can try the AVL Tree online visualizer here: <br>
+      <a href="https://www.cs.usfca.edu/~galles/visualization/AVLtree.html" target="_blank">AVL Tree Visualizer</a>
+    </p>
+  </div>
+
+
+
+
   
   </body>
 </html>

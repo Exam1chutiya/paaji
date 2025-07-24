@@ -396,6 +396,90 @@ int main() {
   </div>
 
 
+  <h1>Q4-Prim's Algorithm - Minimum Spanning Tree (MST)</h1>
+
+  <div class="section">
+    <h2>🔍 Problem Statement:</h2>
+    <p>Construct a Minimum Spanning Tree (MST) using <strong>Prim’s Algorithm</strong>, starting from node <strong>A</strong>. Show the selected edges and compute the total weight of the MST.</p>
+  </div>
+
+  <div class="section">
+    <h2>📊 Given Graph (Edges with Weights):</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Edge</th>
+          <th>Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>A – D</td><td>7</td></tr>
+        <tr><td>A – B</td><td>10</td></tr>
+        <tr><td>A – C</td><td>17</td></tr>
+        <tr><td>B – C</td><td>16</td></tr>
+        <tr><td>B – E</td><td>20</td></tr>
+        <tr><td>C – E</td><td>6</td></tr>
+        <tr><td>C – F</td><td>2</td></tr>
+        <tr><td>C – G</td><td>1</td></tr>
+        <tr><td>D – F</td><td>26</td></tr>
+        <tr><td>F – G</td><td>5</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>⚙ Prim's Algorithm Steps (Starting from A):</h2>
+    <pre>
+1. Start at A
+   → Add edges: A–D(7), A–B(10), A–C(17)
+
+2. Choose A–D (7) → MST = {A, D}
+   → Add D–F(26)
+
+3. Choose A–B (10) → MST = {A, D, B}
+   → Add B–C(16), B–E(20)
+
+4. Choose B–C (16) → MST = {A, D, B, C}
+   → Add C–E(6), C–F(2), C–G(1)
+
+5. Choose C–G (1) → MST = {A, D, B, C, G}
+   → Add F–G(5)
+
+6. Choose C–F (2) → MST = {A, D, B, C, G, F}
+
+7. Choose C–E (6) → MST = {A, D, B, C, G, F, E}
+
+✅ All nodes covered
+    </pre>
+  </div>
+
+  <div class="section">
+    <h2>🌲 Final MST Edges:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Edge</th>
+          <th>Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>A – D</td><td>7</td></tr>
+        <tr><td>A – B</td><td>10</td></tr>
+        <tr><td>B – C</td><td>16</td></tr>
+        <tr><td>C – G</td><td>1</td></tr>
+        <tr><td>C – F</td><td>2</td></tr>
+        <tr><td>C – E</td><td>6</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🧮 Total Weight of MST:</h2>
+    <pre>7 + 10 + 16 + 1 + 2 + 6 = <strong>42</strong></pre>
+  </div>
+
+
+
   
   </body>
 </html>
